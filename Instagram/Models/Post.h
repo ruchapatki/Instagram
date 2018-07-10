@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+@property (nonatomic, strong) NSDate *createdAt;
 
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;

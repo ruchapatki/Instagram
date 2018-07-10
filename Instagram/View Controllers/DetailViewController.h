@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 #import "Post.h"
 
 @interface DetailViewController : UIViewController

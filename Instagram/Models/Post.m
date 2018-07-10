@@ -17,21 +17,8 @@
 @dynamic image;
 @dynamic likeCount;
 @dynamic commentCount;
+@dynamic createdAt;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary{
-    self = [super init];
-    if(self){
-        self.author = dictionary[@"author"];
-        self.caption = dictionary[@"caption"];
-        self.commentCount = dictionary[@"commentCount"];
-        self.image = dictionary[@"image"];
-        self.likeCount = dictionary[@"likeCount"];
-        
-//        self.postID =
-//        self.userID =
-    }
-    return self;
-}
 
 + (nonnull NSString *)parseClassName {
     return @"Post";

@@ -18,7 +18,7 @@
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *postArray;
+@property (strong, nonatomic) NSArray *postArray;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -63,15 +63,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
-    NSDictionary *post = self.postArray[indexPath.row];
     
-    cell.captionLabel.text = post[@"caption"];
-    
-    //set image
-    cell.myImgView.file = post[@"image"];
+    Post *post = self.postArray[indexPath.row];
+    cell.post = post;
+    cell.captionLabel.text = cell.post.caption;
+    //image
+    cell.myImgView.file = cell.post.image;
     [cell.myImgView loadInBackground];
     
-    NSLog(@"POST: %@", post);
+    
+    
+//    NSLog(@"POST: %@", post);
     
     
     return cell;
@@ -84,19 +86,14 @@
 
 - (void)getPosts {
     // construct query
-    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    PFQuery *query = [Post query];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
     
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            [self.postArray removeAllObjects];
-            
-            for (NSDictionary *dictionary in posts) {
-                Post *post = [[Post alloc] initWithDictionary:dictionary];
-                [self.postArray addObject:post];
-            }
+            self.postArray = posts;
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         } else {
@@ -112,6 +109,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"toDetail"]){
+        
         //Need to put somewhere
         PostCell *tappedCell = sender;
         Post *post = tappedCell.post;

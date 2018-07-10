@@ -10,7 +10,7 @@
 
 @interface DetailViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *myImgView;
+@property (weak, nonatomic) IBOutlet PFImageView *myImgView;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 
@@ -21,8 +21,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setViews];
+    
+}
+
+- (void)setViews {
+    self.captionLabel.text = self.post.caption;
+    
+//    NSLog(@"caption: %@", self.post.caption);
+    
+    self.myImgView.file = self.post.image;
     
     
+    NSDate *myDate = self.post.createdAt;
+    NSLog(@"myDate: %@", myDate);
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEE, MMM d, h:mm a"];
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:myDate]];
+    [self.myImgView loadInBackground];
 }
 
 - (void)didReceiveMemoryWarning {
