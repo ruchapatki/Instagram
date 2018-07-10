@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
 @interface PostCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet PFImageView *myImgView;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 
 

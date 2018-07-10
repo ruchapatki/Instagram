@@ -13,6 +13,7 @@
 #import "PostCell.h"
 #import "Post.h"
 
+
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -55,18 +56,10 @@
     NSDictionary *post = self.postArray[indexPath.row];
     
     cell.captionLabel.text = post[@"caption"];
+    
     //set image
-    PFFile *myImg = post[@"image"];
-    [myImg getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if(error != nil){
-            NSLog(@"Successfully uploaded image");
-            UIImage *thePic = [UIImage imageWithData:data];
-            cell.imageView.image = thePic;
-        }
-        else{
-            NSLog(@"Error uploading image: %@", error.localizedDescription);
-        }
-    }];
+    cell.myImgView.file = post[@"image"];
+    [cell.myImgView loadInBackground];
     
     NSLog(@"POST: %@", post);
     
@@ -82,7 +75,6 @@
 - (void)getPosts {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-//    [query whereKey:@"likesCount" greaterThan:@100];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
     

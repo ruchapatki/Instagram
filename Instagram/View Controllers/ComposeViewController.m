@@ -82,7 +82,8 @@
 - (IBAction)didTapShare:(id)sender {
     if(self.imageView.image != nil){
         //resize image for parse
-        CGSize mySize = CGSizeMake(10,10);
+        
+        CGSize mySize = CGSizeMake(100,100);
         UIImage *resizedImg = [self resizeImage:self.imageView.image withSize:mySize];
         
         //share image
