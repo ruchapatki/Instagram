@@ -12,12 +12,13 @@
 #import "Parse.h"
 #import "PostCell.h"
 #import "Post.h"
+#import "DetailViewController.h"
 
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *postArray;
+@property (strong, nonatomic) NSMutableArray *postArray;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -31,7 +32,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.postArray = [NSArray array];
+    self.postArray = [NSMutableArray array];
     [self getPosts];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -90,7 +91,12 @@
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.postArray = posts;
+            [self.postArray removeAllObjects];
+            
+            for (NSDictionary *dictionary in posts) {
+                Post *post = [[Post alloc] initWithDictionary:dictionary];
+                [self.postArray addObject:post];
+            }
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         } else {
@@ -100,14 +106,21 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"toDetail"]){
+        //Need to put somewhere
+        PostCell *tappedCell = sender;
+        Post *post = tappedCell.post;
+        
+        //passing over movie that was tapped to the destination view controller
+        DetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.post = post;
+    }
 }
-*/
+
 
 @end

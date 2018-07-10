@@ -1,5 +1,5 @@
 //
-//  PostCell.h
+//  DetailViewController.h
 //  Instagram
 //
 //  Created by Rucha Patki on 7/9/18.
@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ParseUI/ParseUI.h>
 #import "Post.h"
 
-@interface PostCell : UITableViewCell
-
-
-@property (weak, nonatomic) IBOutlet PFImageView *myImgView;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) Post *post;
-
 
 @end
