@@ -31,7 +31,7 @@
 
     if (PFUser.currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *feedNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"feedNavigationController"];
+        UIViewController *feedNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
         self.window.rootViewController = feedNavigationController;
     }
     

@@ -27,12 +27,9 @@
 
 - (void)setViews {
     self.captionLabel.text = self.post.caption;
-    
-//    NSLog(@"caption: %@", self.post.caption);
-    
     self.myImgView.file = self.post.image;
     
-    
+    //set timestamp
     NSDate *myDate = self.post.createdAt;
     NSLog(@"myDate: %@", myDate);
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

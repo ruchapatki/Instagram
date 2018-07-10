@@ -34,9 +34,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)didTapCancel:(id)sender {
-    [self dismissViewControllerAnimated:true completion:nil];
-}
+//- (IBAction)didTapCancel:(id)sender {
+//    [self dismissViewControllerAnimated:true completion:nil];
+//}
 
 - (IBAction)didTap:(id)sender {
     //gesture recog tapped
@@ -74,7 +74,7 @@
     // Do something with the images (based on your use case)
     self.imageView.image = editedImage;
     
-    // Dismiss UIImagePickerController to go back to your original view controller
+//    // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -94,7 +94,8 @@
             }
             else{
                 NSLog(@"Succesfully shared image");
-                [self dismissViewControllerAnimated:true completion:nil];
+                self.imageView.image = [UIImage imageNamed:@"image_placeholder"];
+                self.captionTextView.text = @"";
             }
         }];
     }
