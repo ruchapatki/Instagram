@@ -8,6 +8,7 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import "MBProgressHud.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -27,16 +28,20 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     [self.imageView setUserInteractionEnabled:YES];
     [self.imageView addGestureRecognizer:tapGestureRecognizer];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard
+{
+    [self.captionTextView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (IBAction)didTapCancel:(id)sender {
-//    [self dismissViewControllerAnimated:true completion:nil];
-//}
 
 - (IBAction)didTap:(id)sender {
     //gesture recog tapped
@@ -82,9 +87,10 @@
 - (IBAction)didTapShare:(id)sender {
     if(self.imageView.image != nil){
         //resize image for parse
-        
-        CGSize mySize = CGSizeMake(100,100);
+        CGSize mySize = CGSizeMake(250,250);
         UIImage *resizedImg = [self resizeImage:self.imageView.image withSize:mySize];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         //share image
         NSString *caption = self.captionTextView.text;
@@ -94,6 +100,7 @@
             }
             else{
                 NSLog(@"Succesfully shared image");
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 self.imageView.image = [UIImage imageNamed:@"image_placeholder"];
                 self.captionTextView.text = @"";
             }

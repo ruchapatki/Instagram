@@ -45,15 +45,12 @@
     
     PFQuery *query = [Post query];
     [query orderByDescending:@"createdAt"];
-    
-    NSLog(@"userid: %@", userid);
-    
-    
     query.limit = 20;
     
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
+            [self.postArray removeAllObjects];
             for(PFObject *object in posts){
                 PFUser *currUser = object[@"author"];
                 if([currUser.objectId isEqualToString:userid]){

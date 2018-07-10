@@ -24,6 +24,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.loginButton.layer.cornerRadius = 7;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard
+{
+    [self.passwordField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

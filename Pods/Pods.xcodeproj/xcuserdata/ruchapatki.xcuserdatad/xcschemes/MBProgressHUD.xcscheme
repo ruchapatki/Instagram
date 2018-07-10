@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3BA201DB6FD18DE8C2F35F406E5BAA3"
-               BlueprintName = "Pods-Instagram"
+               BlueprintIdentifier = "175B076ED45EB1A3E40F58BA14036467"
+               BlueprintName = "MBProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-Instagram.a">
+               BuildableName = "libMBProgressHUD.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
