@@ -44,6 +44,7 @@
     NSString *userid = PFUser.currentUser.objectId;
     
     PFQuery *query = [Post query];
+    [query includeKey:@"author"];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
     

@@ -15,6 +15,10 @@
 
 @property (weak, nonatomic) IBOutlet PFImageView *myImgView;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
+
 
 @property (strong, nonatomic) Post *post;
 -(void) setCell;

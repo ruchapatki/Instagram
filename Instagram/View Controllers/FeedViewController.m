@@ -115,6 +115,7 @@
 - (void)getPosts {
     // construct query
     PFQuery *query = [Post query];
+    [query includeKey:@"author"];
     [query orderByDescending:@"createdAt"];
     query.limit = 20;
     

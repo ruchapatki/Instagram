@@ -17,8 +17,16 @@
 
 -(void) setCell {
     self.captionLabel.text = self.post.caption;
+    self.usernameLabel.text = self.post.author.username;
     //image
     self.myImgView.file = self.post.image;
+    
+    NSDate *myDate = self.post.createdAt;
+    NSLog(@"myDate: %@", myDate);
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEE, MMM d, h:mm a"];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:myDate]];
+    
     [self.myImgView loadInBackground];
 }
 

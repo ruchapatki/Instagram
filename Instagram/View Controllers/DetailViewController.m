@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet PFImageView *myImgView;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+
 
 
 @end
@@ -28,6 +30,7 @@
 - (void)setViews {
     self.captionLabel.text = self.post.caption;
     self.myImgView.file = self.post.image;
+    self.usernameLabel.text = self.post.author.username;
     
     //set timestamp
     NSDate *myDate = self.post.createdAt;
