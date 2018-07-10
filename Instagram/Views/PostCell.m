@@ -15,6 +15,13 @@
     // Initialization code
 }
 
+-(void) setCell {
+    self.captionLabel.text = self.post.caption;
+    //image
+    self.myImgView.file = self.post.image;
+    [self.myImgView loadInBackground];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

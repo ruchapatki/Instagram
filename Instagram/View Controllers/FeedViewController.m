@@ -66,12 +66,7 @@
     
     Post *post = self.postArray[indexPath.row];
     cell.post = post;
-    cell.captionLabel.text = cell.post.caption;
-    //image
-    cell.myImgView.file = cell.post.image;
-    [cell.myImgView loadInBackground];
-    
-    
+    [cell setCell];
     
 //    NSLog(@"POST: %@", post);
     

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 
 @property (strong, nonatomic) Post *post;
+-(void) setCell;
 
 
 @end
