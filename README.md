@@ -18,8 +18,8 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Run your app on your phone and use the camera to take the photo
-- [ ] Style the login page to look like the real Instagram login page.
+- [x] Run your app on your phone and use the camera to take the photo
+- [x] Style the login page to look like the real Instagram login page.
 - [ ] Style the feed to look like the real Instagram feed.
 - [ ] User can use a tab bar to switch between all "Instagram" posts and posts published only by the user. AKA, tabs for Home Feed and Profile
 - [ ] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
