@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
+#import "Post.h"
 
 @interface ProfileViewController : UIViewController
+
+@property (strong, nonatomic) Post *post;
 
 @end

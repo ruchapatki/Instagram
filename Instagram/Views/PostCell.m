@@ -12,8 +12,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+
+    //set gesture recognizer
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUser:)];
+    
+    [self.userImageView addGestureRecognizer:tapGestureRecognizer];
+    [self.userImageView setUserInteractionEnabled:YES];
+    
+    UITapGestureRecognizer *tapGestureRecognizerLabel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUser:)];
+    [self.usernameLabel addGestureRecognizer:tapGestureRecognizerLabel];
+    [self.usernameLabel setUserInteractionEnabled:YES];
 }
+
+- (IBAction)didTapUser:(id)sender {
+    [self.delegate postCell:self didTapUser:self.post];
+}
+
 
 -(void) setCell {
     self.captionLabel.text = self.post.caption;
@@ -43,4 +57,6 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)tapGestureRecognizer:(id)sender {
+}
 @end

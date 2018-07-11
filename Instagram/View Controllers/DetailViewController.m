@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet PFImageView *userImage;
+
 
 
 
@@ -32,6 +34,7 @@
     self.myImgView.file = self.post.image;
     self.usernameLabel.text = self.post.author.username;
     
+    
     //set timestamp
     NSDate *myDate = self.post.createdAt;
     NSLog(@"myDate: %@", myDate);
@@ -39,6 +42,14 @@
     [dateFormat setDateFormat:@"EEE, MMM d, h:mm a"];
     self.timestampLabel.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:myDate]];
     [self.myImgView loadInBackground];
+    
+    //set user image
+    PFUser *user = self.post.author;
+    PFFile *imageFile = user[@"userImage"];
+    if(imageFile != nil){
+        self.userImage.file = imageFile;
+        [self.userImage loadInBackground];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -33,14 +33,6 @@
     [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-    //Get profile image
-    PFUser *myself = PFUser.currentUser;
-    PFFile *imageFile = myself[@"userImage"];
-    if(imageFile != nil){
-        self.userImage.file = imageFile;
-        [self.userImage loadInBackground];
-    }
-
     [self getPosts];
     
     //gesture recognizer
@@ -83,8 +75,29 @@
 }
 
 - (void) getPosts{
-    NSString *userid = PFUser.currentUser.objectId;
-    self.usernameLabel.text = PFUser.currentUser.username;
+    //userid is self unless there's already post passed in
+    NSString *userid = @"";
+    
+    if(self.post.author == nil){
+        userid = PFUser.currentUser.objectId;
+        self.usernameLabel.text = PFUser.currentUser.username;
+        PFUser *myself = PFUser.currentUser;
+        PFFile *imageFile = myself[@"userImage"];
+        if(imageFile != nil){
+            self.userImage.file = imageFile;
+            [self.userImage loadInBackground];
+        }
+    }
+    else{
+        userid = self.post.author.objectId;
+        self.usernameLabel.text = self.post.author.username;
+        PFUser *user = self.post.author;
+        PFFile *imageFile = user[@"userImage"];
+        if(imageFile != nil){
+            self.userImage.file = imageFile;
+            [self.userImage loadInBackground];
+        }
+    }
     
     PFQuery *query = [Post query];
     [query includeKey:@"author"];
@@ -97,6 +110,7 @@
             [self.postArray removeAllObjects];
             for(PFObject *object in posts){
                 PFUser *currUser = object[@"author"];
+                
                 if([currUser.objectId isEqualToString:userid]){
                     [self.postArray addObject:object];
                 }

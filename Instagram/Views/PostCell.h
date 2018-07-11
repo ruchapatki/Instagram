@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
 #import "Post.h"
+#import "PostCell.h"
+
+@protocol PostCellDelegate;
 
 @interface PostCell : UITableViewCell
 
@@ -19,10 +22,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *userImageView;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizerLabel;
 
+@property (nonatomic, weak) id<PostCellDelegate> delegate;
 
 @property (strong, nonatomic) Post *post;
 -(void) setCell;
 
+
+@end
+
+@protocol PostCellDelegate
+
+- (void)postCell:(PostCell *) postCell didTapUser: (Post *)post;
 
 @end

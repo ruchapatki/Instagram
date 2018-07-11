@@ -13,9 +13,10 @@
 #import "PostCell.h"
 #import "Post.h"
 #import "DetailViewController.h"
+#import "ProfileViewController.h"
 
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *postArray;
@@ -99,6 +100,7 @@
     
     Post *post = self.postArray[indexPath.row];
     cell.post = post;
+    cell.delegate = self;
     [cell setCell];
     
 //    NSLog(@"POST: %@", post);
@@ -123,14 +125,6 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             self.postArray = posts;
-            
-            //creating userImage attribute for user
-//            UIImage *placeholder = [UIImage imageNamed:@"image_placeholder"];
-//            for(PFUser *user in self.postArray){
-//                [user addObject:placeholder forKey:@"userImage"];
-//                [user saveInBackground];
-//            }
-            
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         } else {
@@ -155,6 +149,17 @@
         DetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.post = post;
     }
+    
+    else if([segue.identifier isEqualToString:@"toProfile"]){
+        Post *post = sender;
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.post = post;
+    }
+}
+
+
+- (void)postCell:(PostCell *)postCell didTapUser:(Post *)post {
+    [self performSegueWithIdentifier:@"toProfile" sender:post];
 }
 
 
