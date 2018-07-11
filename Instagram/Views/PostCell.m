@@ -18,9 +18,17 @@
 -(void) setCell {
     self.captionLabel.text = self.post.caption;
     self.usernameLabel.text = self.post.author.username;
-    //image
+    //post image
     self.myImgView.file = self.post.image;
     [self.myImgView loadInBackground];
+    //user image
+    PFUser *user = self.post.author;
+    PFFile *imageFile = user[@"userImage"];
+    if(imageFile != nil){
+        self.userImageView.file = imageFile;
+        [self.userImageView loadInBackground];
+    }
+    
     
     NSDate *myDate = self.post.createdAt;
     NSLog(@"myDate: %@", myDate);
