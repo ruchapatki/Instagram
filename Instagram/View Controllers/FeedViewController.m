@@ -123,6 +123,14 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             self.postArray = posts;
+            
+            //creating userImage attribute for user
+//            UIImage *placeholder = [UIImage imageNamed:@"image_placeholder"];
+//            for(PFUser *user in self.postArray){
+//                [user addObject:placeholder forKey:@"userImage"];
+//                [user saveInBackground];
+//            }
+            
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         } else {

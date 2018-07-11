@@ -9,11 +9,12 @@
 #import "ProfileViewController.h"
 #import "PostCell.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet PFImageView *userImage;
 @property (strong, nonatomic) NSMutableArray *postArray;
-
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -32,8 +33,49 @@
     [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
+    //Get profile image
+    PFUser *myself = PFUser.currentUser;
+    PFFile *imageFile = myself[@"userImage"];
+    if(imageFile != nil){
+        self.userImage.file = imageFile;
+        [self.userImage loadInBackground];
+    }
+
     [self getPosts];
+    
+    //gesture recognizer
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    [self.userImage setUserInteractionEnabled:YES];
+    [self.userImage addGestureRecognizer:tapGestureRecognizer];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
+
+- (IBAction)didTap:(id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    self.userImage.image = editedImage;
+    PFFile *userImageFile = [PFFile fileWithData: UIImageJPEGRepresentation(editedImage, 1.0)];
+
+    //Save user's profile image
+    PFUser *myself = PFUser.currentUser;
+    myself[@"userImage"] = userImageFile;
+    [myself saveInBackground];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -42,6 +84,7 @@
 
 - (void) getPosts{
     NSString *userid = PFUser.currentUser.objectId;
+    self.usernameLabel.text = PFUser.currentUser.username;
     
     PFQuery *query = [Post query];
     [query includeKey:@"author"];
