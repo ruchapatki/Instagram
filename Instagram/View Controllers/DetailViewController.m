@@ -94,7 +94,6 @@
     
     //set timestamp
     NSDate *myDate = self.post.createdAt;
-    NSLog(@"myDate: %@", myDate);
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEE, MMM d, h:mm a"];
     self.timestampLabel.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:myDate]];
@@ -107,6 +106,10 @@
         self.userImage.file = imageFile;
         [self.userImage loadInBackground];
     }
+    
+    self.userImage.layer.cornerRadius = self.userImage.frame.size.height /2;
+    self.userImage.layer.masksToBounds = YES;
+    self.userImage.layer.borderWidth = 0;
 }
 
 - (void)didReceiveMemoryWarning {

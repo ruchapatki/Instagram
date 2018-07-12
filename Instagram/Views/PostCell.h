@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UILabel *lowUsernameLabel;
+
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizerLabel;

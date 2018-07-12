@@ -15,6 +15,8 @@
 #import "DetailViewController.h"
 #import "ProfileViewController.h"
 
+#import "ProfileGridViewController.h"
+
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate>
 
@@ -149,7 +151,9 @@
     
     else if([segue.identifier isEqualToString:@"toProfile"]){
         Post *post = sender;
-        ProfileViewController *profileViewController = [segue destinationViewController];
+//        ProfileViewController *profileViewController = [segue destinationViewController];
+        ProfileGridViewController *profileViewController = [segue destinationViewController];
+
         profileViewController.post = post;
     }
 }

@@ -32,6 +32,7 @@
 -(void) setCell {
     self.captionLabel.text = self.post.caption;
     self.usernameLabel.text = self.post.author.username;
+    self.lowUsernameLabel.text = self.post.author.username;
     //post image
     self.myImgView.file = self.post.image;
     [self.myImgView loadInBackground];
@@ -42,6 +43,11 @@
         self.userImageView.file = imageFile;
         [self.userImageView loadInBackground];
     }
+    
+    //make profile images circular
+    self.userImageView.layer.cornerRadius = self.userImageView.frame.size.height /2;
+    self.userImageView.layer.masksToBounds = YES;
+    self.userImageView.layer.borderWidth = 0;
     
     
     NSDate *myDate = self.post.createdAt;

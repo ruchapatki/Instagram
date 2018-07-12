@@ -20,7 +20,6 @@
 @dynamic createdAt;
 
 @dynamic likedBy;
-@dynamic unlikedBy;
 @dynamic comments;
 
 
@@ -37,7 +36,6 @@
     newPost.commentCount = @(0);
     
     newPost.likedBy = [NSMutableArray new];
-    newPost.unlikedBy = [NSMutableArray new];
     newPost.comments = [NSMutableArray new];
     
     [newPost saveInBackgroundWithBlock: completion];

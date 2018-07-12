@@ -22,7 +22,6 @@
 @property (nonatomic, strong) NSDate *createdAt;
 
 @property (nonatomic, strong) NSMutableArray *likedBy;
-@property (nonatomic, strong) NSMutableArray *unlikedBy;
 
 @property (nonatomic, strong) NSMutableArray *comments;
 

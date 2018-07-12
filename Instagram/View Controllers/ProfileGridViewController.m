@@ -1,47 +1,70 @@
 //
-//  ProfileViewController.m
+//  ProfileGridViewController.m
 //  Instagram
 //
-//  Created by Rucha Patki on 7/10/18.
+//  Created by Rucha Patki on 7/12/18.
 //  Copyright © 2018 Rucha Patki. All rights reserved.
 //
 
-#import "ProfileViewController.h"
-#import "PostCell.h"
+#import "ProfileGridViewController.h"
+#import "PostCollectionViewCell.h"
+#import "Post.h"
+#import "DetailViewController.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate>
+@interface ProfileGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *userImage;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberPosts;
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 
 @end
 
-@implementation ProfileViewController
+@implementation ProfileGridViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self getPosts];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     
-    self.postArray = [NSMutableArray array];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    self.postArray = [NSMutableArray new];
     
     [self getPosts];
+    
+    //refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
+    
+    
+    //collection view layout, spacing
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 5;
+    
+    CGFloat postersPerLine = 3;
+    CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing*(postersPerLine - 1))/postersPerLine;
+    CGFloat itemHeight = itemWidth;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
     //gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     [self.userImage setUserInteractionEnabled:YES];
     [self.userImage addGestureRecognizer:tapGestureRecognizer];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)didTap:(id)sender {
@@ -59,7 +82,7 @@
     
     self.userImage.image = editedImage;
     PFFile *userImageFile = [PFFile fileWithData: UIImageJPEGRepresentation(editedImage, 1.0)];
-
+    
     //Save user's profile image
     PFUser *myself = PFUser.currentUser;
     myself[@"userImage"] = userImageFile;
@@ -73,12 +96,21 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    PostCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionViewCell" forIndexPath:indexPath];
+    Post *post = self.postArray[indexPath.row];
+    cell.post = post;
+    [cell setCell];
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.postArray.count;
 }
 
 - (void) getPosts{
+    
     //userid is self unless there's already post passed in
     NSString *userid = @"";
     NSString *incompleteHandle = @"@";
@@ -128,9 +160,11 @@
                     [self.postArray addObject:object];
                 }
             }
+            NSString *numPosts = [NSString stringWithFormat: @"%ld", (long)self.postArray.count];
+            self.numberPosts.text = numPosts;
             
             [self.refreshControl endRefreshing];
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -138,26 +172,18 @@
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
-    Post *post = self.postArray[indexPath.row];
-    cell.post = post;
-    [cell setCell];
-    return cell;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.postArray.count;
-}
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    if([segue.identifier isEqualToString:@"toDetail"]){
+        PostCollectionViewCell *cell = sender;
+        DetailViewController *detailVC = [segue destinationViewController];
+        detailVC.post = cell.post;
+    }
 }
-*/
+
 
 @end
