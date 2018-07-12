@@ -21,6 +21,7 @@
 
 @dynamic likedBy;
 @dynamic unlikedBy;
+@dynamic comments;
 
 
 + (nonnull NSString *)parseClassName {
@@ -37,6 +38,7 @@
     
     newPost.likedBy = [NSMutableArray new];
     newPost.unlikedBy = [NSMutableArray new];
+    newPost.comments = [NSMutableArray new];
     
     [newPost saveInBackgroundWithBlock: completion];
 }

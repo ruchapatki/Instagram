@@ -24,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray *likedBy;
 @property (nonatomic, strong) NSMutableArray *unlikedBy;
 
+@property (nonatomic, strong) NSMutableArray *comments;
+
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 

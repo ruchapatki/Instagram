@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 
+
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *heartTouchRecognizer;
 
 
@@ -39,28 +40,35 @@
 
 - (IBAction)didTapHeart:(id)sender {
     
+    
     BOOL inArr = NO;
-    for(PFUser *user in self.post.unlikedBy){
-        if([self.post.author.objectId isEqualToString:user.objectId]){
+    for(PFUser *user in self.post.likedBy){
+        if([PFUser.currentUser.objectId isEqualToString:user.objectId]){
             inArr = YES;
         }
     }
-    if(!inArr){
-        //in liked, need to unlike
-        [self.post addUniqueObject:self.post.author forKey:@"unlikedBy"];
+    
+    if(inArr){
+        //user has liked, need to unlike
+        [self.post removeObject:PFUser.currentUser forKey:@"likedBy"];
         self.heartImage.image = [UIImage imageNamed:@"favor-icon"];
     }
     else{
-        //not yet liked, need to like
-        [self.post addUniqueObject:self.post.author forKey:@"likedBy"];
+        //user hasn't liked, need to like
+        [self.post addUniqueObject:PFUser.currentUser forKey:@"likedBy"];
         self.heartImage.image = [UIImage imageNamed:@"favor-icon-red"];
     }
 
-    self.post.likeCount = @(self.post.likedBy.count - self.post.unlikedBy.count);
+    self.post.likeCount = @(self.post.likedBy.count);
     [self.post saveInBackground];
     
     NSString *incompleteLikes = @" likes";
     self.likesLabel.text = [[self.post.likeCount stringValue] stringByAppendingString:incompleteLikes];
+}
+
+
+- (IBAction)didTapComment:(id)sender {
+    
 }
 
 
@@ -75,7 +83,7 @@
     //set correct heart image
     BOOL inArr = NO;
     for(PFUser *user in self.post.likedBy){
-        if([self.post.author.objectId isEqualToString:user.objectId]){
+        if([PFUser.currentUser.objectId isEqualToString:user.objectId]){
             inArr = YES;
         }
     }
