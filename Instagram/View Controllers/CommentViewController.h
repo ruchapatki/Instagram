@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
+#import "Post.h"
 
 @interface CommentViewController : UIViewController
+
+@property (strong, nonatomic) Post *post;
+
 
 @end

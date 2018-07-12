@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "CommentViewController.h"
 
 @interface DetailViewController ()
 
@@ -67,10 +68,6 @@
 }
 
 
-- (IBAction)didTapComment:(id)sender {
-    
-}
-
 
 - (void)setViews {
     self.captionLabel.text = self.post.caption;
@@ -117,14 +114,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    //for toComment:
+    CommentViewController *commentVC = [segue destinationViewController];
+    commentVC.post = self.post;
 }
-*/
+
 
 @end

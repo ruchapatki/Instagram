@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+//#import "Comment.h"
 
 @interface CommentCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 
-@property (strong, nonatomic) Post *post;
--(void) setCell;
+@property (strong, nonatomic) NSString *username;
+
+-(void) setCell: ( NSString * )caption;
 
 
 @end

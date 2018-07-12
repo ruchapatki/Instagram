@@ -21,8 +21,13 @@
     // Configure the view for the selected state
 }
 
--(void) setCell{
-    
+-(void) setCell:(NSString *)caption{
+    NSUInteger splitter = [caption rangeOfString:@":"].location;
+    NSString *result = [caption substringWithRange:NSMakeRange(0, splitter)];
+
+    self.usernameLabel.text = result;
+    self.commentLabel.text = [caption substringWithRange:NSMakeRange(splitter + 2, caption.length - result.length - 2)];
 }
+
 
 @end
