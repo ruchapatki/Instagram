@@ -77,10 +77,11 @@
 - (void) getPosts{
     //userid is self unless there's already post passed in
     NSString *userid = @"";
+    NSString *incompleteHandle = @"@";
     
     if(self.post.author == nil){
         userid = PFUser.currentUser.objectId;
-        self.usernameLabel.text = PFUser.currentUser.username;
+        self.usernameLabel.text = [incompleteHandle stringByAppendingString:PFUser.currentUser.username];
         PFUser *myself = PFUser.currentUser;
         PFFile *imageFile = myself[@"userImage"];
         if(imageFile != nil){
@@ -90,7 +91,7 @@
     }
     else{
         userid = self.post.author.objectId;
-        self.usernameLabel.text = self.post.author.username;
+        self.usernameLabel.text = [incompleteHandle stringByAppendingString:self.post.author.username];
         PFUser *user = self.post.author;
         PFFile *imageFile = user[@"userImage"];
         if(imageFile != nil){

@@ -15,7 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *userImage;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLowLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *heartImage;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *heartTouchRecognizer;
 
 
 
@@ -27,12 +32,59 @@
     [super viewDidLoad];
     [self setViews];
     
+    UITapGestureRecognizer *heartTouchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapHeart:)];
+    [self.heartImage addGestureRecognizer:heartTouchRecognizer];
+    [self.heartImage setUserInteractionEnabled:YES];
 }
+
+- (IBAction)didTapHeart:(id)sender {
+    
+    BOOL inArr = NO;
+    for(PFUser *user in self.post.unlikedBy){
+        if([self.post.author.objectId isEqualToString:user.objectId]){
+            inArr = YES;
+        }
+    }
+    if(!inArr){
+        //in liked, need to unlike
+        [self.post addUniqueObject:self.post.author forKey:@"unlikedBy"];
+        self.heartImage.image = [UIImage imageNamed:@"favor-icon"];
+    }
+    else{
+        //not yet liked, need to like
+        [self.post addUniqueObject:self.post.author forKey:@"likedBy"];
+        self.heartImage.image = [UIImage imageNamed:@"favor-icon-red"];
+    }
+
+    self.post.likeCount = @(self.post.likedBy.count - self.post.unlikedBy.count);
+    [self.post saveInBackground];
+    
+    NSString *incompleteLikes = @" likes";
+    self.likesLabel.text = [[self.post.likeCount stringValue] stringByAppendingString:incompleteLikes];
+}
+
 
 - (void)setViews {
     self.captionLabel.text = self.post.caption;
     self.myImgView.file = self.post.image;
     self.usernameLabel.text = self.post.author.username;
+    self.usernameLowLabel.text = self.post.author.username;
+    NSString *incompleteLikes = @" likes";
+    self.likesLabel.text = [[self.post.likeCount stringValue] stringByAppendingString:incompleteLikes];
+    
+    //set correct heart image
+    BOOL inArr = NO;
+    for(PFUser *user in self.post.likedBy){
+        if([self.post.author.objectId isEqualToString:user.objectId]){
+            inArr = YES;
+        }
+    }
+    if(inArr){
+        self.heartImage.image = [UIImage imageNamed:@"favor-icon-red"];
+    }
+    else{
+        self.heartImage.image = [UIImage imageNamed:@"favor-icon"];
+    }
     
     
     //set timestamp

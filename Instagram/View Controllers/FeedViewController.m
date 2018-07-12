@@ -103,9 +103,6 @@
     cell.delegate = self;
     [cell setCell];
     
-//    NSLog(@"POST: %@", post);
-    
-    
     return cell;
 }
 
