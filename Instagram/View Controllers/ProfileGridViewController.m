@@ -10,6 +10,8 @@
 #import "PostCollectionViewCell.h"
 #import "Post.h"
 #import "DetailViewController.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface ProfileGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -93,6 +95,19 @@
     self.userImage.layer.borderWidth = 0;
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)didTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
 }
 
 

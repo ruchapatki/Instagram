@@ -52,17 +52,18 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-    [self performSegueWithIdentifier:@"myCam" sender:nil];
+//    [self performSegueWithIdentifier:@"myCam" sender:nil];
     
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self performSegueWithIdentifier:@"myCam" sender:nil];
 //        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
 //        [self presentViewController:imagePickerVC animated:YES completion:nil];
-//    }
-//    else {
-//        NSLog(@"Camera 🚫 available so we will use photo library instead");
-//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        [self photoLib];
-//    }
+    }
+    else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self photoLib];
+    }
 }
 
 - (void) photoLib {
@@ -89,6 +90,7 @@
 
 
 - (IBAction)didTapShare:(id)sender {
+    
     if(self.imageView.image != nil){
         //resize image for parse
         CGSize mySize = CGSizeMake(250,250);

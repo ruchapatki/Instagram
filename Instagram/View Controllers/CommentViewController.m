@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *commentTextField;
 
-//@property (strong, nonatomic) NSMutableArray *commentsArray;
-
 
 @end
 

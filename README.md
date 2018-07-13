@@ -2,7 +2,7 @@
 
 Instagram is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -31,16 +31,16 @@ The following **optional** features are implemented:
 - [x] Tapping on a post's username or profile photo goes to that user's profile page
 - [x] User can comment on a post and see all comments for each post in the post details screen.
 - [x] User can like a post and see number of likes for each post in the post details screen.
-- [ ] Implement a custom camera view.
+- [x] Implement a custom camera view.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Different view controller flow to make it more intuitive for users
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Making a text field view move up when the keyboard appears
+2. Have a custom camera view conform to specified size restrictions
 
 ## Video Walkthrough
 
@@ -59,11 +59,11 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Many parts of this app were challenging, especially familiarizing myself with the use of Parse. Liking and unliking was difficult to figure out, but more clear once I realized I had to add and store to an array in the database. The collection view for the profile controller was also difficult to implement, due to the layout and spacing I wanted to achieve.
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright 2018 Rucha Patki
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

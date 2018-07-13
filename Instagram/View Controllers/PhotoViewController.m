@@ -12,7 +12,6 @@
 @interface PhotoViewController () <AVCapturePhotoCaptureDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *previewView;
-@property (weak, nonatomic) IBOutlet UIImageView *captureImageView;
 
 @property (nonatomic) AVCaptureSession *session;
 @property (nonatomic) AVCapturePhotoOutput *stillImageOutput;
@@ -82,7 +81,6 @@
     
     NSData *imageData = photo.fileDataRepresentation;
     UIImage *image = [UIImage imageWithData:imageData];
-    self.captureImageView.image = image;
     self.takenImage = image;
     
     [self performSegueWithIdentifier:@"backToCompose" sender:nil];
