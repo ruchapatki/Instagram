@@ -27,10 +27,6 @@
 
 @implementation ProfileGridViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self getPosts];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

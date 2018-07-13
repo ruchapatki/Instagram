@@ -268,7 +268,7 @@
                                 <rect key="frame" x="0.0" y="200" width="375" height="467"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gSb-Ky-x5B">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="gSb-Ky-x5B">
                                     <size key="itemSize" width="121" height="121"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -354,11 +354,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CIh-vT-VyS" customClass="PFImageView">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CIh-vT-VyS" customClass="PFImageView">
                                 <rect key="frame" x="0.0" y="118" width="375" height="375"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="375" id="cf9-2N-3NF"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="6jW-rI-wUm" appends="YES" id="dN5-vz-UgS"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOr-Q9-Hht">
                                 <rect key="frame" x="16" y="590" width="343" height="21"/>
@@ -454,6 +458,7 @@
                     </view>
                     <connections>
                         <outlet property="captionLabel" destination="yl6-Te-1y4" id="hv2-pd-TMo"/>
+                        <outlet property="doubleTap" destination="6jW-rI-wUm" id="scU-aY-fPd"/>
                         <outlet property="heartImage" destination="Khv-kh-LZY" id="gZH-zM-vdv"/>
                         <outlet property="heartTouchRecognizer" destination="Vac-ZX-oaa" id="jkr-c7-KDI"/>
                         <outlet property="likesLabel" destination="7m3-Wp-bZh" id="NY6-7A-WHz"/>
@@ -470,6 +475,7 @@
                         <action selector="didTapHeart:" destination="Phd-kq-gIv" id="edg-qP-C97"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="6jW-rI-wUm"/>
             </objects>
             <point key="canvasLocation" x="2617" y="-600"/>
         </scene>

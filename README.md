@@ -36,6 +36,9 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Different view controller flow to make it more intuitive for users
+- [x] Running on laptop simulator results in choosing pictures from camera roll, while running on phone results in taking pictures from a custom photo view.
+- [x] Can double tap in detailed view to like and unlike image
+
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

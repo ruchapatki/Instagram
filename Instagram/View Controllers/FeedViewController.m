@@ -24,6 +24,8 @@
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (assign, nonatomic) int numTimes;
+
 
 @end
 
@@ -31,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.numTimes = 1;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -69,7 +72,8 @@
     // construct query
     PFQuery *query = [Post query];
     [query orderByDescending:@"createdAt"];
-    query.limit = 40;
+    self.numTimes++;
+    query.limit = self.numTimes * 20;
     
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -137,7 +141,6 @@
     
     else if([segue.identifier isEqualToString:@"toProfile"]){
         Post *post = sender;
-//        ProfileViewController *profileViewController = [segue destinationViewController];
         ProfileGridViewController *profileViewController = [segue destinationViewController];
 
         profileViewController.post = post;

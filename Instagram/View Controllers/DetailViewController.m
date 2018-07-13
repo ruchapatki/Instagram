@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *heartTouchRecognizer;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *doubleTap;
+
 
 
 @end
@@ -37,11 +39,14 @@
     UITapGestureRecognizer *heartTouchRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapHeart:)];
     [self.heartImage addGestureRecognizer:heartTouchRecognizer];
     [self.heartImage setUserInteractionEnabled:YES];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapHeart:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.myImgView addGestureRecognizer:doubleTap];
+    [self.myImgView setUserInteractionEnabled:YES];
 }
 
 - (IBAction)didTapHeart:(id)sender {
-    
-    
     BOOL inArr = NO;
     for(PFUser *user in self.post.likedBy){
         if([PFUser.currentUser.objectId isEqualToString:user.objectId]){
