@@ -15,14 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 
-
 @end
 
 @implementation ComposeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     //gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
@@ -31,6 +29,10 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    if(self.chosenImage != nil){
+        self.imageView.image = self.chosenImage;
+    }
 }
 
 -(void)dismissKeyboard
@@ -50,15 +52,17 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:imagePickerVC animated:YES completion:nil];
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self photoLib];
-    }
+    [self performSegueWithIdentifier:@"myCam" sender:nil];
+    
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        [self presentViewController:imagePickerVC animated:YES completion:nil];
+//    }
+//    else {
+//        NSLog(@"Camera 🚫 available so we will use photo library instead");
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        [self photoLib];
+//    }
 }
 
 - (void) photoLib {

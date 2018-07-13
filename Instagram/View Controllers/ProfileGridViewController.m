@@ -82,7 +82,7 @@
     
     self.userImage.image = editedImage;
     PFFile *userImageFile = [PFFile fileWithData: UIImageJPEGRepresentation(editedImage, 1.0)];
-    
+
     //Save user's profile image
     PFUser *myself = PFUser.currentUser;
     myself[@"userImage"] = userImageFile;
@@ -99,7 +99,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PostCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionViewCell" forIndexPath:indexPath];
-    Post *post = self.postArray[indexPath.row];
+    Post *post = self.postArray[indexPath.item];
     cell.post = post;
     [cell setCell];
     return cell;

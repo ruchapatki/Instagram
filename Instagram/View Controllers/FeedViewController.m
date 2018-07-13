@@ -13,7 +13,6 @@
 #import "PostCell.h"
 #import "Post.h"
 #import "DetailViewController.h"
-#import "ProfileViewController.h"
 
 #import "ProfileGridViewController.h"
 

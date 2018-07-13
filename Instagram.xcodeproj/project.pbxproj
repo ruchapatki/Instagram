@@ -21,11 +21,11 @@
 		9575D6F220F41D5F002A26D0 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D6F120F41D5F002A26D0 /* Post.m */; };
 		9575D6F620F42161002A26D0 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D6F520F42161002A26D0 /* PostCell.m */; };
 		9575D6F920F4384E002A26D0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D6F820F4384E002A26D0 /* DetailViewController.m */; };
-		9575D6FC20F539A2002A26D0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D6FB20F539A2002A26D0 /* ProfileViewController.m */; };
 		9575D70420F6D92A002A26D0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D70320F6D92A002A26D0 /* CommentViewController.m */; };
 		9575D70720F6DAF8002A26D0 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D70620F6DAF8002A26D0 /* CommentCell.m */; };
 		9575D70D20F805F5002A26D0 /* ProfileGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D70C20F805F5002A26D0 /* ProfileGridViewController.m */; };
 		9575D71020F807A6002A26D0 /* PostCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D70F20F807A6002A26D0 /* PostCollectionViewCell.m */; };
+		9575D71320F81F79002A26D0 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9575D71220F81F79002A26D0 /* PhotoViewController.m */; };
 		BE72820B915C922E3EED12E9 /* libPods-Instagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2607479B4AD1B92FC13325 /* libPods-Instagram.a */; };
 		F2860C0CF8B3270919C10791 /* libPods-InstagramTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA906182AE752B70D0652F4C /* libPods-InstagramTests.a */; };
 /* End PBXBuildFile section */
@@ -78,8 +78,6 @@
 		9575D6F520F42161002A26D0 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		9575D6F720F4384E002A26D0 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		9575D6F820F4384E002A26D0 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		9575D6FA20F539A2002A26D0 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		9575D6FB20F539A2002A26D0 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9575D70220F6D92A002A26D0 /* CommentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		9575D70320F6D92A002A26D0 /* CommentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		9575D70520F6DAF8002A26D0 /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -88,6 +86,8 @@
 		9575D70C20F805F5002A26D0 /* ProfileGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileGridViewController.m; sourceTree = "<group>"; };
 		9575D70E20F807A6002A26D0 /* PostCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCollectionViewCell.h; sourceTree = "<group>"; };
 		9575D70F20F807A6002A26D0 /* PostCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCollectionViewCell.m; sourceTree = "<group>"; };
+		9575D71120F81F79002A26D0 /* PhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		9575D71220F81F79002A26D0 /* PhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		975EEC890100F07E597DA015 /* libPods-InstagramUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA906182AE752B70D0652F4C /* libPods-InstagramTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2607479B4AD1B92FC13325 /* libPods-Instagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Instagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,12 +214,12 @@
 				9575D6E620F410A4002A26D0 /* LoginViewController.m */,
 				9575D6F720F4384E002A26D0 /* DetailViewController.h */,
 				9575D6F820F4384E002A26D0 /* DetailViewController.m */,
-				9575D6FA20F539A2002A26D0 /* ProfileViewController.h */,
-				9575D6FB20F539A2002A26D0 /* ProfileViewController.m */,
 				9575D70220F6D92A002A26D0 /* CommentViewController.h */,
 				9575D70320F6D92A002A26D0 /* CommentViewController.m */,
 				9575D70B20F805F5002A26D0 /* ProfileGridViewController.h */,
 				9575D70C20F805F5002A26D0 /* ProfileGridViewController.m */,
+				9575D71120F81F79002A26D0 /* PhotoViewController.h */,
+				9575D71220F81F79002A26D0 /* PhotoViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -463,12 +463,12 @@
 			files = (
 				9575D70720F6DAF8002A26D0 /* CommentCell.m in Sources */,
 				9575D6E720F410A4002A26D0 /* LoginViewController.m in Sources */,
-				9575D6FC20F539A2002A26D0 /* ProfileViewController.m in Sources */,
 				9575D6F220F41D5F002A26D0 /* Post.m in Sources */,
 				9575D6C320F404E4002A26D0 /* main.m in Sources */,
 				9575D70420F6D92A002A26D0 /* CommentViewController.m in Sources */,
 				9575D6F920F4384E002A26D0 /* DetailViewController.m in Sources */,
 				9575D6EA20F410C6002A26D0 /* FeedViewController.m in Sources */,
+				9575D71320F81F79002A26D0 /* PhotoViewController.m in Sources */,
 				9575D70D20F805F5002A26D0 /* ProfileGridViewController.m in Sources */,
 				9575D6F620F42161002A26D0 /* PostCell.m in Sources */,
 				9575D71020F807A6002A26D0 /* PostCollectionViewCell.m in Sources */,

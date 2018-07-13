@@ -10,4 +10,6 @@
 
 @interface ComposeViewController : UIViewController
 
+@property (strong, nonatomic) UIImage *chosenImage;
+
 @end
