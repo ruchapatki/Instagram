@@ -52,6 +52,7 @@ Here's a walkthrough of implemented user stories:
 <img src='https://i.imgur.com/uNRavkI.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 <img src='https://i.imgur.com/XEFCatd.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough' />
 <img src='https://i.imgur.com/Uibgc2I.gif' title='Video Walkthrough 3' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/NqC0sUy.gif' title='Video Walkthrough 3' width='' alt='Video Walkthrough' />
 
 The video of a custom camera view can be found in the file "Video".
 
