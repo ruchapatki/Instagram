@@ -49,9 +49,13 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/uNRavkI.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/XEFCatd.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/Uibgc2I.gif' title='Video Walkthrough 3' width='' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+The video of a custom camera view can be found in the file "Video".
+
+GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Credits
 
